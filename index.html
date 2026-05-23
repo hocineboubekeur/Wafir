@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SurpriseBox — Save Food. Save Money. Save the Planet.</title>
+
+  <!-- ── Google Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- ── Tailwind CSS (CDN) ── -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body:    ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            grove: {
+              50:  '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0',
+              400: '#4ade80', 500: '#22c55e', 600: '#16a34a',
+              700: '#15803d', 800: '#166534', 900: '#14532d',
+            },
+            zest:  { 400: '#fb923c', 500: '#f97316', 600: '#ea6c00' },
+            amber: { 300: '#fcd34d', 400: '#fbbf24' },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ── Custom Stylesheet ── -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- ── GSAP (loaded in <head> so heroTl fires immediately) ── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     NAV
+════════════════════════════════════ -->
+<nav id="main-nav" class="px-6 py-4">
+  <div class="max-w-6xl mx-auto flex items-center justify-between">
+
+    <div id="nav-logo" style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;">
+      Surprise<span style="color:#fbbf24;">Box</span>
+    </div>
+
+    <!-- Desktop links -->
+    <div id="nav-links" class="hidden md:flex items-center gap-8">
+      <a href="#how-it-works" class="text-white/80 hover:text-white text-sm font-semibold transition-colors">How It Works</a>
+      <a href="#merchants"    class="text-white/80 hover:text-white text-sm font-semibold transition-colors">For Merchants</a>
+      <a href="#charity"      class="text-white/80 hover:text-white text-sm font-semibold transition-colors">Charity</a>
+      <a href="#partner"      class="btn-cta-primary text-sm" style="padding:10px 22px;">Get Started →</a>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="Open menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="3" y1="6"  x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <div id="mobile-menu" class="md:hidden hidden flex-col items-center gap-4 pt-6 pb-4">
+    <a href="#how-it-works" class="text-white font-semibold">How It Works</a>
+    <a href="#merchants"    class="text-white font-semibold">For Merchants</a>
+    <a href="#charity"      class="text-white font-semibold">Charity</a>
+    <a href="#partner"      class="btn-cta-primary w-full text-center justify-center">Get Started →</a>
+  </div>
+</nav>
+
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="hero-bg min-h-screen flex flex-col justify-center pt-24 pb-0 relative">
+  <div class="hero-blob-1"></div>
+  <div class="hero-blob-2"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+
+      <!-- Left: Copy -->
+      <div class="flex-1 text-center lg:text-left">
+        <div id="hero-badge" class="badge-pill mb-6 inline-flex">
+          <span>🌱</span> Now live in 12 cities
+        </div>
+
+        <h1 id="hero-headline" class="hero-title mb-6">
+          Save Food.<br/>
+          Save Money.<br/>
+          Save the <span class="accent">Planet.</span>
+        </h1>
+
+        <p id="hero-sub" class="text-white/75 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
+          Grab premium <strong class="text-white">"Surprise Boxes"</strong> from your favorite local
+          restaurants and bakeries at <strong class="text-amber-300">70% off</strong>.
+          No waste, just great taste.
+        </p>
+
+        <div id="hero-ctas" class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="#" class="btn-cta-primary">
+            <!-- Apple icon -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.35c1.42.07 2.4.8 3.22.78.96-.05 2.79-.89 4.05-.42 2.18.76 3.01 2.96 2.73 5.57zm-5.59-10.3c-.19-1.8.8-3.77 2.44-4.78 1.58-1.01 3.47-.68 4.37-.07-.64 3.4-3.52 4.77-6.81 4.85z"/>
+            </svg>
+            Download the App
+          </a>
+          <a href="#partner" class="btn-cta-secondary">
+            🤝 Partner With Us
+          </a>
+        </div>
+        
+        <!-- Trust micro-stats -->
+        <div id="hero-stats" class="flex flex-wrap gap-6 mt-10 justify-center lg:justify-start text-white/60 text-sm">
+          <div class="flex items-center gap-2">
+            <span class="text-green-400 font-bold text-xl">1,247</span>
+            <span>Meals saved this week</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-green-400 font-bold text-xl">340+</span>
+            <span>Partner businesses</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-green-400 font-bold text-xl">4.9★</span>
+            <span>App Store rating</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Phone Mockup -->
+      <div id="hero-phone" class="relative flex-shrink-0 flex items-center justify-center" style="margin-bottom:-2px;">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+
+            <!-- Hero listing card -->
+            <div class="phone-card">
+              <h4>🥐 Sunrise Bakery</h4>
+              <p>Mixed pastry box · End-of-day special</p>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span class="phone-badge">70% OFF</span>
+                <span style="font-size:13px;font-weight:800;color:#fff;">$3.99</span>
+                <span style="font-size:9px;text-decoration:line-through;opacity:0.5;color:#fff;">$13.50</span>
+              </div>
+            </div>
+
+            <!-- Secondary listing 1 -->
+            <div class="phone-mini-card">
+              <span class="phone-icon">🌮</span>
+              <div>
+                <div class="phone-mini-label">Taco Loca — 2 boxes left</div>
+                <div class="phone-mini-sub">Pickup 7:30–8:00 PM · 0.3 mi away</div>
+              </div>
+            </div>
+
+            <!-- Secondary listing 2 -->
+            <div class="phone-mini-card">
+              <span class="phone-icon">☕</span>
+              <div>
+                <div class="phone-mini-label">The Daily Grind — 1 box left</div>
+                <div class="phone-mini-sub">Pickup 6:00–7:00 PM · 0.8 mi away</div>
+              </div>
+            </div>
+
+            <div class="phone-btn">Reserve Now →</div>
+          </div>
+        </div>
+
+        <!-- Floating status tags -->
+        <div class="floating-tag tag-left">🍩 Just listed!</div>
+        <div class="floating-tag tag-right" style="color:var(--green-primary);">✅ Box redeemed</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Wave transition into next section -->
+  <div class="wave-divider mt-16">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#faf9f6"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     STAT TICKER
+════════════════════════════════════ -->
+<div class="stat-ticker">
+  <div class="ticker-track">
+    <!-- Items are duplicated for a seamless infinite loop -->
+    <div class="ticker-item"><span class="ticker-dot"></span>🌍 27 tons of food saved to date</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🎁 Over 8,400 Surprise Boxes sold</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>💚 340+ businesses in our network</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🏆 Rated #1 Sustainability App 2024</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🤝 210 charity donations this month</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>💰 Users save avg. $54/month</div>
+    <!-- Duplicate set for seamless loop -->
+    <div class="ticker-item"><span class="ticker-dot"></span>🌍 27 tons of food saved to date</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🎁 Over 8,400 Surprise Boxes sold</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>💚 340+ businesses in our network</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🏆 Rated #1 Sustainability App 2024</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>🤝 210 charity donations this month</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>💰 Users save avg. $54/month</div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════ -->
+<section id="how-it-works" class="py-24 px-6" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-16 reveal">
+      <p class="section-eyebrow mb-3">The Frictionless Flow</p>
+      <h2 class="section-title mb-4">How It Works</h2>
+      <p class="text-gray-500 text-lg max-w-xl mx-auto">
+        From listing to pickup in under 60 seconds. No complexity, no waste.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Step 1 -->
+      <div class="step-card reveal">
+        <div class="step-number">01</div>
+        <div class="step-icon-wrap">🎁</div>
+        <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">The Surprise Box</h3>
+        <p class="text-gray-500 leading-relaxed">
+          Businesses pack their unsold, perfectly good end-of-day food into a sealed box.
+          No itemization. No counting. One tap and it's live.
+        </p>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);">
+          <span class="text-sm font-semibold text-green-700 flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Zero labor added
+          </span>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card reveal" style="transition-delay:0.15s">
+        <div class="step-number">02</div>
+        <div class="step-icon-wrap">⚡</div>
+        <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Instant Reservation</h3>
+        <p class="text-gray-500 leading-relaxed">
+          Spot a box near you? Pay the flat discounted rate instantly before it's gone.
+          FOMO is real — boxes often sell out within minutes.
+        </p>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);">
+          <span class="text-sm font-semibold text-orange-600 flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Up to 70% off retail price
+          </span>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card reveal" style="transition-delay:0.3s">
+        <div class="step-number">03</div>
+        <div class="step-icon-wrap">🏃</div>
+        <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Quick Pickup</h3>
+        <p class="text-gray-500 leading-relaxed">
+          Swing by during the designated end-of-day window. Scan your in-app QR code,
+          grab your box, and enjoy the mystery haul.
+        </p>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);">
+          <span class="text-sm font-semibold text-green-700 flex items-center gap-2">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            30-second scan &amp; go
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     MERCHANT BENEFITS
+════════════════════════════════════ -->
+<section id="merchants" class="merchant-section py-24 px-6" id="partner">
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="flex flex-col lg:flex-row gap-16 items-start">
+
+      <!-- Left: Copy -->
+      <div class="flex-1 reveal">
+        <p class="section-eyebrow mb-3" style="color:#86efac;">For Businesses</p>
+        <h2 class="section-title mb-6 text-white">
+          Turn Waste Into Revenue — <span style="color:#fbbf24;">With Zero Added Work.</span>
+        </h2>
+        <p style="color:rgba(255,255,255,0.65);" class="text-lg leading-relaxed mb-8">
+          We built SurpriseBox around one principle:
+          <strong style="color:#fff;">zero friction for the merchant.</strong>
+          No inventory management. No special packaging. No cannibalization of your regular sales.
+          Just tap once, monetize your surplus, and we handle the rest.
+        </p>
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-4">
+            <div style="width:40px;height:40px;background:rgba(46,204,106,0.2);border:1px solid rgba(46,204,106,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
+            <p style="color:rgba(255,255,255,0.75);">No liability for box contents — you pack what's available</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div style="width:40px;height:40px;background:rgba(46,204,106,0.2);border:1px solid rgba(46,204,106,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
+            <p style="color:rgba(255,255,255,0.75);">Revenue paid directly to your account within 24 hours</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <div style="width:40px;height:40px;background:rgba(46,204,106,0.2);border:1px solid rgba(46,204,106,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
+            <p style="color:rgba(255,255,255,0.75);">Dedicated partner dashboard with real-time analytics</p>
+          </div>
+        </div>
+        <a href="#" class="btn-cta-primary mt-10 inline-flex" style="background:#fbbf24;color:#111;box-shadow:0 8px 24px rgba(251,191,36,0.4);">
+          Start Selling Boxes →
+        </a>
+      </div>
+
+      <!-- Right: Benefit Cards -->
+      <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="benefit-card reveal">
+          <div class="benefit-icon">🚀</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">1-Tap Listing</h4>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">Set your box live in under 10 seconds. No descriptions, photos, or item counts required.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay:0.1s">
+          <div class="benefit-icon">📦</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">No Inventory Counting</h4>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">The Surprise Box model means you never need to list what's inside. Just seal and sell.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay:0.2s">
+          <div class="benefit-icon">🛡️</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">Zero Cannibalization</h4>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">Boxes are only listed at end-of-day, protecting your full-price sales all day long.</p>
+        </div>
+        <div class="benefit-card reveal" style="transition-delay:0.3s">
+          <div class="benefit-icon">📈</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">New Customer Discovery</h4>
+          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">Box buyers become loyal regulars. It's free marketing that feeds your pipeline.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     CHARITY / PAY-IT-FORWARD
+════════════════════════════════════ -->
+<section id="charity" class="charity-section py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-14 reveal">
+      <p class="section-eyebrow mb-3" style="color:#d97706;">Pay-It-Forward</p>
+      <h2 class="section-title mb-4">
+        Good Food. <span style="color:var(--orange-cta);">Even Better Karma.</span>
+      </h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        With one tap, transform your purchase into a gift for someone who really needs it.
+        No middlemen. Instant digital transfer.
+      </p>
+    </div>
+
+    <!-- Donate flow diagram -->
+    <div class="donate-flow mb-14 reveal">
+      <div class="flow-node">
+        <div style="font-size:2rem;margin-bottom:8px;">🛒</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#111;">You buy</div>
+        <div style="font-size:0.75rem;color:#888;">a Surprise Box</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div style="font-size:2rem;margin-bottom:8px;">💛</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#111;">Tap "Donate"</div>
+        <div style="font-size:0.75rem;color:#888;">in the app</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="background:linear-gradient(135deg,#fff9ee,#fef3c7);border-color:#fcd34d;">
+        <div style="font-size:2rem;margin-bottom:8px;">📱</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#111;">Ticket transfers</div>
+        <div style="font-size:0.75rem;color:#888;">digitally, instantly</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac;">
+        <div style="font-size:2rem;margin-bottom:8px;">🤲</div>
+        <div style="font-size:0.85rem;font-weight:700;color:#111;">Charity picks up</div>
+        <div style="font-size:0.75rem;color:#888;">at the same window</div>
+      </div>
+    </div>
+
+    <!-- Impact counters — data-count drives the JS counter animation -->
+    <div class="grid md:grid-cols-3 gap-6 reveal">
+      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #fde68a;text-align:center;">
+        <div data-count="210" style="font-size:2.5rem;font-family:'Syne',sans-serif;font-weight:800;color:#d97706;">0</div>
+        <div style="font-size:0.85rem;color:#888;margin-top:4px;">Boxes donated this month</div>
+      </div>
+      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #fde68a;text-align:center;">
+        <div data-count="48" style="font-size:2.5rem;font-family:'Syne',sans-serif;font-weight:800;color:#d97706;">0</div>
+        <div style="font-size:0.85rem;color:#888;margin-top:4px;">Partner charities &amp; shelters</div>
+      </div>
+      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #fde68a;text-align:center;">
+        <div style="font-size:2.5rem;font-family:'Syne',sans-serif;font-weight:800;color:#d97706;">$0</div>
+        <div style="font-size:0.85rem;color:#888;margin-top:4px;">Platform fee on donated boxes</div>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-gray-400 mt-8">
+      ✦ Verified partner charities only — every recipient is vetted and onboarded by our trust &amp; safety team.
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     SOCIAL PROOF / TRUST BANNER
+════════════════════════════════════ -->
+<section class="py-24 px-6" style="background:var(--cream);">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="text-center mb-14 reveal">
+      <p class="section-eyebrow mb-3">Trusted Partners</p>
+      <h2 class="section-title mb-4">
+        The businesses already <span style="color:var(--green-primary);">on board.</span>
+      </h2>
+      <div style="display:inline-flex;align-items:center;gap:8px;background:#dcfce7;border:1px solid #86efac;border-radius:50px;padding:8px 18px;font-size:0.85rem;font-weight:600;color:#15803d;">
+        🎉 Over 1,000 meals saved this month
+      </div>
+    </div>
+
+    <!-- Partner badge grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 reveal">
+      <div class="partner-badge">
+        <div class="partner-avatar" style="background:#fef9ee;">🥐</div>
+        <div>
+          <div class="font-semibold text-sm">Sunrise Artisan Bakery</div>
+          <div class="text-xs text-gray-400">340 boxes sold · ⭐ 4.9</div>
+        </div>
+      </div>
+      <div class="partner-badge">
+        <div class="partner-avatar" style="background:#fef2f2;">🌮</div>
+        <div>
+          <div class="font-semibold text-sm">Taco Loca</div>
+          <div class="text-xs text-gray-400">218 boxes sold · ⭐ 4.8</div>
+        </div>
+      </div>
+      <div class="partner-badge">
+        <div class="partner-avatar" style="background:#f0fdf4;">🥗</div>
+        <div>
+          <div class="font-semibold text-sm">Green Bowl Kitchen</div>
+          <div class="text-xs text-gray-400">179 boxes sold · ⭐ 5.0</div>
+        </div>
+      </div>
+      <div class="partner-badge">
+        <div class="partner-avatar" style="background:#eff6ff;">☕</div>
+        <div>
+          <div class="font-semibold text-sm">The Daily Grind Café</div>
+          <div class="text-xs text-gray-400">154 boxes sold · ⭐ 4.9</div>
+        </div>
+      </div>
+      <div class="partner-badge">
+        <div class="partner-avatar" style="background:#fdf4ff;">🍕</div>
+        <div>
+          <div class="font-semibold text-sm">Margherita &amp; Co.</div>
+          <div class="text-xs text-gray-400">132 boxes sold · ⭐ 4.7</div>
+        </div>
+      </div>
+      <div class="partner-badge" style="border-style:dashed;border-color:rgba(26,122,60,0.25);justify-content:center;cursor:pointer;">
+        <span class="text-green-700 font-bold text-sm text-center">+ 335 more partners →</span>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="grid md:grid-cols-2 gap-6 reveal">
+      <div class="testimonial-card">
+        <p class="text-gray-600 leading-relaxed mt-6 mb-6">
+          "We used to throw away two full trays of pastries every night. Now those same items generate
+          an extra $300/month with zero extra work. SurpriseBox is a no-brainer."
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#dcfce7,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:20px;">👩</div>
+          <div>
+            <div class="font-bold text-sm">Maria Chen</div>
+            <div class="text-xs text-gray-400">Owner, Sunrise Artisan Bakery</div>
+          </div>
+          <div class="ml-auto text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="text-gray-600 leading-relaxed mt-6 mb-6">
+          "I got a box with a sourdough loaf, three croissants, and a pain au chocolat for $4.
+          My jaw dropped. I've been hooked every Friday since."
+        </p>
+        <div class="flex items-center gap-3">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#fff7ed,#fed7aa);display:flex;align-items:center;justify-content:center;font-size:20px;">👨</div>
+          <div>
+            <div class="font-bold text-sm">Alex Rivera</div>
+            <div class="text-xs text-gray-400">Regular Customer, San Francisco</div>
+          </div>
+          <div class="ml-auto text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     FINAL CTA BAND
+════════════════════════════════════ -->
+<section style="background:linear-gradient(135deg,#0f4d26,#1a7a3c);padding:80px 24px;text-align:center;">
+  <div class="max-w-3xl mx-auto reveal">
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;">
+      Ready to rescue some food?
+    </h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;margin-bottom:36px;">
+      Join 12,000+ users already saving money and the planet — one Surprise Box at a time.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
+      <a href="#" class="btn-cta-primary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.35c1.42.07 2.4.8 3.22.78.96-.05 2.79-.89 4.05-.42 2.18.76 3.01 2.96 2.73 5.57zm-5.59-10.3c-.19-1.8.8-3.77 2.44-4.78 1.58-1.01 3.47-.68 4.37-.07-.64 3.4-3.52 4.77-6.81 4.85z"/>
+        </svg>
+        Download on the App Store
+      </a>
+      <a href="#" class="btn-cta-secondary">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M3.18 23.76c.34.19.72.24 1.09.14l12.72-7.35-2.76-2.77-11.05 9.98zm16.8-10.4L17.4 11.9 14.37 15l3.05 3.05 2.59-1.5c.74-.43.74-1.56-.03-2.19zM1.54.43C1.2.78 1 1.33 1 2.02v20c0 .69.2 1.24.54 1.59l.08.08 11.2-11.2v-.27L1.62.35l-.08.08zm12.85 11.71L3.17 1.02c.37-.1.76-.06 1.1.14l12.73 7.35-2.61 3.63z"/>
+        </svg>
+        Get it on Google Play
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer class="pt-16 pb-8 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+
+      <!-- Brand column -->
+      <div class="col-span-2 md:col-span-1">
+        <div class="footer-logo mb-4">Surprise<span>Box</span></div>
+        <p style="font-size:0.9rem;line-height:1.7;color:rgba(255,255,255,0.5);">
+          Connecting surplus food with people who love it. One sealed box at a time.
+        </p>
+        <div class="flex gap-3 mt-6">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5"/>
+              <circle cx="12" cy="12" r="5"/>
+              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+            </svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Company links -->
+      <div>
+        <h5 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:16px;">Company</h5>
+        <ul style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Sustainability Report</a></li>
+          <li><a href="#">Press &amp; Media</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+
+      <!-- Platform links -->
+      <div>
+        <h5 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:16px;">Platform</h5>
+        <ul style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;">
+          <li><a href="#merchants">For Businesses</a></li>
+          <li><a href="#charity">For Charities</a></li>
+          <li><a href="#">Partner Dashboard</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal links -->
+      <div>
+        <h5 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:16px;">Legal</h5>
+        <ul style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;">
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li>
+            <a href="#" style="display:flex;flex-direction:column;gap:2px;">
+              Food Handling Policy
+              <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:400;">
+                Zero liability model — see details
+              </span>
+            </a>
+          </li>
+          <li><a href="#">Cookie Preferences</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
+      <p style="font-size:0.82rem;color:rgba(255,255,255,0.3);">
+        © 2025 SurpriseBox Technologies, Inc. All rights reserved. Made with 💚 for the planet.
+      </p>
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.2);">
+        SurpriseBox is a technology platform. We do not handle, prepare, or take liability for food items.
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════════════════
+     SCRIPTS (loaded last for performance)
+════════════════════════════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
