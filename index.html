@@ -3,285 +3,221 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SurpriseBox — Save Food. Save Money. Save the Planet.</title>
+  <title>WFIR وفير — Algeria's Food Rescue App</title>
 
   <!-- ── Google Fonts ── -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- ── Tailwind CSS (CDN) ── -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            body:    ['Plus Jakarta Sans', 'sans-serif'],
-          },
-          colors: {
-            grove: {
-              50:  '#f0fdf4', 100: '#dcfce7', 200: '#bbf7d0',
-              400: '#4ade80', 500: '#22c55e', 600: '#16a34a',
-              700: '#15803d', 800: '#166534', 900: '#14532d',
-            },
-            zest:  { 400: '#fb923c', 500: '#f97316', 600: '#ea6c00' },
-            amber: { 300: '#fcd34d', 400: '#fbbf24' },
-          },
-        },
-      },
-    };
-  </script>
-
-  <!-- ── Custom Stylesheet ── -->
+  <!-- ── Stylesheet ── -->
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- ── GSAP (loaded in <head> so heroTl fires immediately) ── -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 </head>
 <body>
 
 <!-- ════════════════════════════════════
-     NAV
+     NAVIGATION
 ════════════════════════════════════ -->
-<nav id="main-nav" class="px-6 py-4">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">W<span>FIR</span> <span style="font-size:0.55em;opacity:0.6;font-weight:400;">وفير</span></div>
 
-    <div id="nav-logo" style="font-family:'Syne',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;">
-      Surprise<span style="color:#fbbf24;">Box</span>
-    </div>
-
-    <!-- Desktop links -->
-    <div id="nav-links" class="hidden md:flex items-center gap-8">
-      <a href="#how-it-works" class="text-white/80 hover:text-white text-sm font-semibold transition-colors">How It Works</a>
-      <a href="#merchants"    class="text-white/80 hover:text-white text-sm font-semibold transition-colors">For Merchants</a>
-      <a href="#charity"      class="text-white/80 hover:text-white text-sm font-semibold transition-colors">Charity</a>
-      <a href="#partner"      class="btn-cta-primary text-sm" style="padding:10px 22px;">Get Started →</a>
-    </div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#journey">How It Works</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#math">Mathematics</a></li>
+      <li><a href="#advantage">Advantage</a></li>
+      <li><a href="#pitfalls">Risks</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#partners" class="nav-cta">Get Started</a></li>
+    </ul>
 
     <!-- Mobile hamburger -->
-    <button id="mobile-menu-btn" class="md:hidden text-white" aria-label="Open menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="3" y1="6"  x2="21" y2="6"/>
-        <line x1="3" y1="12" x2="21" y2="12"/>
-        <line x1="3" y1="18" x2="21" y2="18"/>
-      </svg>
+    <button id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
     </button>
   </div>
 
-  <!-- Mobile dropdown menu -->
-  <div id="mobile-menu" class="md:hidden hidden flex-col items-center gap-4 pt-6 pb-4">
-    <a href="#how-it-works" class="text-white font-semibold">How It Works</a>
-    <a href="#merchants"    class="text-white font-semibold">For Merchants</a>
-    <a href="#charity"      class="text-white font-semibold">Charity</a>
-    <a href="#partner"      class="btn-cta-primary w-full text-center justify-center">Get Started →</a>
-  </div>
+  <!-- Mobile dropdown -->
+  <ul id="mobile-nav">
+    <li><a href="#about">About WFIR</a></li>
+    <li><a href="#journey">How It Works</a></li>
+    <li><a href="#team">Our Team</a></li>
+    <li><a href="#math">Mathematics</a></li>
+    <li><a href="#advantage">Why We're Different</a></li>
+    <li><a href="#pitfalls">Risk Management</a></li>
+    <li><a href="#partners">Partners</a></li>
+  </ul>
 </nav>
 
 
 <!-- ════════════════════════════════════
      HERO
 ════════════════════════════════════ -->
-<section class="hero-bg min-h-screen flex flex-col justify-center pt-24 pb-0 relative">
-  <div class="hero-blob-1"></div>
-  <div class="hero-blob-2"></div>
+<section id="hero">
+  <div class="hero-orb"></div>
 
-  <div class="max-w-6xl mx-auto px-6 w-full">
-    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+  <!-- Decorative rotating star -->
+  <svg class="hero-star" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 0 L116 67 L183 50 L133 100 L183 150 L116 133 L100 200 L84 133 L17 150 L67 100 L17 50 L84 67 Z" fill="white"/>
+    <path d="M100 20 L112 73 L165 60 L125 100 L165 140 L112 127 L100 180 L88 127 L35 140 L75 100 L35 60 L88 73 Z" fill="none" stroke="white" stroke-width="1"/>
+  </svg>
 
-      <!-- Left: Copy -->
-      <div class="flex-1 text-center lg:text-left">
-        <div id="hero-badge" class="badge-pill mb-6 inline-flex">
-          <span>🌱</span> Now live in 12 cities
-        </div>
+  <div class="hero-content">
+    <div id="hero-eyebrow" class="hero-eyebrow">🌿 Algeria's First Food-Rescue App · Algiers 2025</div>
 
-        <h1 id="hero-headline" class="hero-title mb-6">
-          Save Food.<br/>
-          Save Money.<br/>
-          Save the <span class="accent">Planet.</span>
-        </h1>
+    <div id="hero-arabic" class="hero-arabic">
+      W<span>FIR</span>
+      <div style="font-size:0.45em;letter-spacing:0.05em;opacity:0.85;margin-top:4px;">وفير</div>
+    </div>
 
-        <p id="hero-sub" class="text-white/75 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
-          Grab premium <strong class="text-white">"Surprise Boxes"</strong> from your favorite local
-          restaurants and bakeries at <strong class="text-amber-300">70% off</strong>.
-          No waste, just great taste.
-        </p>
+    <p id="hero-tagline" class="hero-tagline">Abundant. Accessible. Sustainable.</p>
 
-        <div id="hero-ctas" class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-          <a href="#" class="btn-cta-primary">
-            <!-- Apple icon -->
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.35c1.42.07 2.4.8 3.22.78.96-.05 2.79-.89 4.05-.42 2.18.76 3.01 2.96 2.73 5.57zm-5.59-10.3c-.19-1.8.8-3.77 2.44-4.78 1.58-1.01 3.47-.68 4.37-.07-.64 3.4-3.52 4.77-6.81 4.85z"/>
-            </svg>
-            Download the App
-          </a>
-          <a href="#partner" class="btn-cta-secondary">
-            🤝 Partner With Us
-          </a>
-        </div>
-        
-        <!-- Trust micro-stats -->
-        <div id="hero-stats" class="flex flex-wrap gap-6 mt-10 justify-center lg:justify-start text-white/60 text-sm">
-          <div class="flex items-center gap-2">
-            <span class="text-green-400 font-bold text-xl">1,247</span>
-            <span>Meals saved this week</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-green-400 font-bold text-xl">340+</span>
-            <span>Partner businesses</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="text-green-400 font-bold text-xl">4.9★</span>
-            <span>App Store rating</span>
-          </div>
-        </div>
+    <p id="hero-meaning" class="hero-meaning">
+      From the Arabic <strong>وفير</strong> — meaning <strong>"abundant & accessible"</strong>
+      — a smart mobile platform rescuing surplus food across Algiers.
+    </p>
+
+    <div id="hero-stats" class="hero-stats">
+      <div class="stat-pill">
+        <span class="num" data-count="30" data-suffix="%">30%</span>
+        <span class="lbl">Food wasted in Algeria</span>
       </div>
-
-      <!-- Right: Phone Mockup -->
-      <div id="hero-phone" class="relative flex-shrink-0 flex items-center justify-center" style="margin-bottom:-2px;">
-        <div class="phone-shell">
-          <div class="phone-notch"></div>
-          <div class="phone-screen">
-
-            <!-- Hero listing card -->
-            <div class="phone-card">
-              <h4>🥐 Sunrise Bakery</h4>
-              <p>Mixed pastry box · End-of-day special</p>
-              <div style="display:flex;align-items:center;gap:6px;">
-                <span class="phone-badge">70% OFF</span>
-                <span style="font-size:13px;font-weight:800;color:#fff;">$3.99</span>
-                <span style="font-size:9px;text-decoration:line-through;opacity:0.5;color:#fff;">$13.50</span>
-              </div>
-            </div>
-
-            <!-- Secondary listing 1 -->
-            <div class="phone-mini-card">
-              <span class="phone-icon">🌮</span>
-              <div>
-                <div class="phone-mini-label">Taco Loca — 2 boxes left</div>
-                <div class="phone-mini-sub">Pickup 7:30–8:00 PM · 0.3 mi away</div>
-              </div>
-            </div>
-
-            <!-- Secondary listing 2 -->
-            <div class="phone-mini-card">
-              <span class="phone-icon">☕</span>
-              <div>
-                <div class="phone-mini-label">The Daily Grind — 1 box left</div>
-                <div class="phone-mini-sub">Pickup 6:00–7:00 PM · 0.8 mi away</div>
-              </div>
-            </div>
-
-            <div class="phone-btn">Reserve Now →</div>
-          </div>
-        </div>
-
-        <!-- Floating status tags -->
-        <div class="floating-tag tag-left">🍩 Just listed!</div>
-        <div class="floating-tag tag-right" style="color:var(--green-primary);">✅ Box redeemed</div>
+      <div class="stat-pill">
+        <span class="num" data-prefix="€" data-count="500" data-suffix="M+">€500M+</span>
+        <span class="lbl">Annual value lost</span>
       </div>
-
+      <div class="stat-pill">
+        <span class="num" data-count="40" data-suffix="–60%">40–60%</span>
+        <span class="lbl">Discount on Surprise Bags</span>
+      </div>
+      <div class="stat-pill">
+        <span class="num" data-count="3">3</span>
+        <span class="lbl">Winners: Consumers · Businesses · Charities</span>
+      </div>
     </div>
   </div>
 
-  <!-- Wave transition into next section -->
-  <div class="wave-divider mt-16">
-    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#faf9f6"/>
+  <div class="scroll-cue">
+    <span>Scroll to explore</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"/>
     </svg>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════
-     STAT TICKER
+     WHO WE ARE
 ════════════════════════════════════ -->
-<div class="stat-ticker">
-  <div class="ticker-track">
-    <!-- Items are duplicated for a seamless infinite loop -->
-    <div class="ticker-item"><span class="ticker-dot"></span>🌍 27 tons of food saved to date</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>🎁 Over 8,400 Surprise Boxes sold</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>💚 340+ businesses in our network</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>🏆 Rated #1 Sustainability App 2024</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>🤝 210 charity donations this month</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>💰 Users save avg. $54/month</div>
-    <!-- Duplicate set for seamless loop -->
-    <div class="ticker-item"><span class="ticker-dot"></span>🌍 27 tons of food saved to date</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>🎁 Over 8,400 Surprise Boxes sold</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>💚 340+ businesses in our network</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>🏆 Rated #1 Sustainability App 2024</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>🤝 210 charity donations this month</div>
-    <div class="ticker-item"><span class="ticker-dot"></span>💰 Users save avg. $54/month</div>
-  </div>
-</div>
-
-
-<!-- ════════════════════════════════════
-     HOW IT WORKS
-════════════════════════════════════ -->
-<section id="how-it-works" class="py-24 px-6" style="background:var(--cream);">
-  <div class="max-w-6xl mx-auto">
-
-    <div class="text-center mb-16 reveal">
-      <p class="section-eyebrow mb-3">The Frictionless Flow</p>
-      <h2 class="section-title mb-4">How It Works</h2>
-      <p class="text-gray-500 text-lg max-w-xl mx-auto">
-        From listing to pickup in under 60 seconds. No complexity, no waste.
+<section id="about" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Who We Are &amp; Why WFIR</div>
+      <h2 class="section-title">Rescuing Food.<br/><span class="accent">Feeding Communities.</span></h2>
+      <p class="section-sub">
+        Every year, nearly 30% of food in Algeria is wasted — while food prices keep rising.
+        WFIR bridges the gap between surplus and need.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="about-grid">
 
-      <!-- Step 1 -->
-      <div class="step-card reveal">
-        <div class="step-number">01</div>
-        <div class="step-icon-wrap">🎁</div>
-        <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">The Surprise Box</h3>
-        <p class="text-gray-500 leading-relaxed">
-          Businesses pack their unsold, perfectly good end-of-day food into a sealed box.
-          No itemization. No counting. One tap and it's live.
-        </p>
-        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);">
-          <span class="text-sm font-semibold text-green-700 flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Zero labor added
-          </span>
+      <!-- Problem card — full width -->
+      <div class="about-card about-problem reveal">
+        <div style="max-width:680px;position:relative;z-index:1;">
+          <p style="font-size:0.8rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:10px;">
+            📍 The Problem in Algiers
+          </p>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:16px;">
+            Restaurants, bakeries, supermarkets &amp; hotels dispose of<br/>
+            <span style="color:var(--gold-light);">perfectly edible food daily</span> — with no digital outlet.
+          </h3>
+          <p style="font-size:0.9rem;opacity:0.75;line-height:1.7;margin-bottom:24px;">
+            There is no efficient digital redistribution system in Algeria.
+            WFIR solves this by connecting consumers directly with trusted WFIR Retailer accounts listing
+            surplus food as <strong style="color:var(--gold-light);">Surprise Bags</strong> at the end of service — at 40–60% off retail price.
+            Unclaimed bags are redirected to charities for free.
+          </p>
+          <div class="about-stat-row">
+            <div class="about-stat">
+              <div class="big" data-count="30" data-suffix="%">30%</div>
+              <div class="small">Food wasted annually</div>
+            </div>
+            <div class="about-stat">
+              <div class="big" data-prefix=">" data-count="500" data-suffix="M€">>500M€</div>
+              <div class="small">Lost economic value</div>
+            </div>
+            <div class="about-stat">
+              <div class="big" data-count="0">0</div>
+              <div class="small">Local digital competitors</div>
+            </div>
+            <div class="about-stat">
+              <div class="big" data-count="3">3</div>
+              <div class="small">Sided marketplace</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Step 2 -->
-      <div class="step-card reveal" style="transition-delay:0.15s">
-        <div class="step-number">02</div>
-        <div class="step-icon-wrap">⚡</div>
-        <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Instant Reservation</h3>
-        <p class="text-gray-500 leading-relaxed">
-          Spot a box near you? Pay the flat discounted rate instantly before it's gone.
-          FOMO is real — boxes often sell out within minutes.
-        </p>
-        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);">
-          <span class="text-sm font-semibold text-orange-600 flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Up to 70% off retail price
-          </span>
+      <!-- Triple Win -->
+      <div class="about-card reveal delay-1">
+        <div class="card-icon">🛒</div>
+        <div class="card-title">For Consumers</div>
+        <div class="card-body">
+          Browse nearby Surprise Bags filtered by allergens, price, and pickup window.
+          Get premium meals at 40–60% off from trusted local businesses — and enjoy the mystery!
+        </div>
+        <div class="tag-list">
+          <span class="tag">40–60% off</span>
+          <span class="tag">Allergy filters</span>
+          <span class="tag">Map / List view</span>
         </div>
       </div>
 
-      <!-- Step 3 -->
-      <div class="step-card reveal" style="transition-delay:0.3s">
-        <div class="step-number">03</div>
-        <div class="step-icon-wrap">🏃</div>
-        <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Quick Pickup</h3>
-        <p class="text-gray-500 leading-relaxed">
-          Swing by during the designated end-of-day window. Scan your in-app QR code,
-          grab your box, and enjoy the mystery haul.
-        </p>
-        <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.06);">
-          <span class="text-sm font-semibold text-green-700 flex items-center gap-2">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            30-second scan &amp; go
-          </span>
+      <!-- For Businesses -->
+      <div class="about-card reveal delay-2">
+        <div class="card-icon">🏪</div>
+        <div class="card-title">For Businesses</div>
+        <div class="card-body">
+          Turn daily surplus into revenue with zero added labor. List your end-of-day bags in
+          one tap and gain new loyal customers while reducing your carbon footprint.
+        </div>
+        <div class="tag-list">
+          <span class="tag">Extra revenue</span>
+          <span class="tag">Zero labor</span>
+          <span class="tag">Brand visibility</span>
+        </div>
+      </div>
+
+      <!-- For Charities -->
+      <div class="about-card reveal delay-1">
+        <div class="card-icon">❤️</div>
+        <div class="card-title">For Charities</div>
+        <div class="card-body">
+          Unclaimed Surprise Bags are automatically redirected to verified charity partners at no cost.
+          WFIR's charity network ensures zero food reaches the landfill.
+        </div>
+        <div class="tag-list">
+          <span class="tag">Free redistribution</span>
+          <span class="tag">Verified partners</span>
+          <span class="tag">Zero landfill</span>
+        </div>
+      </div>
+
+      <!-- Eco impact -->
+      <div class="about-card reveal delay-2">
+        <div class="card-icon">🌍</div>
+        <div class="card-title">Environmental Impact</div>
+        <div class="card-body">
+          By reducing food waste, WFIR directly lowers CO₂ emissions — food waste accounts for
+          ~8–10% of global greenhouse gases. Every rescued bag counts.
+        </div>
+        <div class="tag-list">
+          <span class="tag">CO₂ reduction</span>
+          <span class="tag">Eco-friendly city</span>
+          <span class="tag">Sustainable DZ</span>
         </div>
       </div>
 
@@ -291,258 +227,504 @@
 
 
 <!-- ════════════════════════════════════
-     MERCHANT BENEFITS
+     CONSUMER JOURNEY
 ════════════════════════════════════ -->
-<section id="merchants" class="merchant-section py-24 px-6" id="partner">
-  <div class="max-w-6xl mx-auto relative z-10">
-    <div class="flex flex-col lg:flex-row gap-16 items-start">
+<section id="journey" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Consumer Journey</div>
+      <h2 class="section-title">How <span class="accent">WFIR</span> Works</h2>
+      <p class="section-sub">From download to delicious — in four effortless steps.</p>
+    </div>
 
-      <!-- Left: Copy -->
-      <div class="flex-1 reveal">
-        <p class="section-eyebrow mb-3" style="color:#86efac;">For Businesses</p>
-        <h2 class="section-title mb-6 text-white">
-          Turn Waste Into Revenue — <span style="color:#fbbf24;">With Zero Added Work.</span>
-        </h2>
-        <p style="color:rgba(255,255,255,0.65);" class="text-lg leading-relaxed mb-8">
-          We built SurpriseBox around one principle:
-          <strong style="color:#fff;">zero friction for the merchant.</strong>
-          No inventory management. No special packaging. No cannibalization of your regular sales.
-          Just tap once, monetize your surplus, and we handle the rest.
-        </p>
-        <div class="flex flex-col gap-4">
-          <div class="flex items-center gap-4">
-            <div style="width:40px;height:40px;background:rgba(46,204,106,0.2);border:1px solid rgba(46,204,106,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
-            <p style="color:rgba(255,255,255,0.75);">No liability for box contents — you pack what's available</p>
-          </div>
-          <div class="flex items-center gap-4">
-            <div style="width:40px;height:40px;background:rgba(46,204,106,0.2);border:1px solid rgba(46,204,106,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
-            <p style="color:rgba(255,255,255,0.75);">Revenue paid directly to your account within 24 hours</p>
-          </div>
-          <div class="flex items-center gap-4">
-            <div style="width:40px;height:40px;background:rgba(46,204,106,0.2);border:1px solid rgba(46,204,106,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">✅</div>
-            <p style="color:rgba(255,255,255,0.75);">Dedicated partner dashboard with real-time analytics</p>
-          </div>
-        </div>
-        <a href="#" class="btn-cta-primary mt-10 inline-flex" style="background:#fbbf24;color:#111;box-shadow:0 8px 24px rgba(251,191,36,0.4);">
-          Start Selling Boxes →
-        </a>
-      </div>
+    <div class="journey-steps">
 
-      <!-- Right: Benefit Cards -->
-      <div class="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div class="benefit-card reveal">
-          <div class="benefit-icon">🚀</div>
-          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">1-Tap Listing</h4>
-          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">Set your box live in under 10 seconds. No descriptions, photos, or item counts required.</p>
+      <div class="journey-step reveal delay-1">
+        <div class="step-bubble">
+          📲
+          <div class="step-num">1</div>
         </div>
-        <div class="benefit-card reveal" style="transition-delay:0.1s">
-          <div class="benefit-icon">📦</div>
-          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">No Inventory Counting</h4>
-          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">The Surprise Box model means you never need to list what's inside. Just seal and sell.</p>
-        </div>
-        <div class="benefit-card reveal" style="transition-delay:0.2s">
-          <div class="benefit-icon">🛡️</div>
-          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">Zero Cannibalization</h4>
-          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">Boxes are only listed at end-of-day, protecting your full-price sales all day long.</p>
-        </div>
-        <div class="benefit-card reveal" style="transition-delay:0.3s">
-          <div class="benefit-icon">📈</div>
-          <h4 style="font-family:'Syne',sans-serif;font-weight:700;color:#fff;margin-bottom:8px;">New Customer Discovery</h4>
-          <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;line-height:1.6;">Box buyers become loyal regulars. It's free marketing that feeds your pipeline.</p>
+        <div class="step-title">Download &amp; Register</div>
+        <div class="step-body">
+          Create your WFIR Consumer account. Add allergen preferences so every bag shown to you is safe to eat.
         </div>
       </div>
 
+      <div class="journey-step reveal delay-2">
+        <div class="step-bubble">
+          🗺️
+          <div class="step-num">2</div>
+        </div>
+        <div class="step-title">Browse Nearby Bags</div>
+        <div class="step-body">
+          Explore via map or list view. See price, original value, pickup window &amp; allergen info — with smart allergy filters active.
+        </div>
+      </div>
+
+      <div class="journey-step reveal delay-3">
+        <div class="step-bubble">
+          💳
+          <div class="step-num">3</div>
+        </div>
+        <div class="step-title">Reserve &amp; Pay</div>
+        <div class="step-body">
+          Pay securely via <strong>CIB</strong>, <strong>Edahabia</strong>, or <strong>cash on pickup</strong> for trusted consumers.
+          Your bag is locked in instantly.
+        </div>
+      </div>
+
+      <div class="journey-step reveal delay-4">
+        <div class="step-bubble">
+          🎁
+          <div class="step-num">4</div>
+        </div>
+        <div class="step-title">Pickup &amp; Enjoy!</div>
+        <div class="step-body">
+          Swing by during the pickup window, collect your sealed Surprise Bag, and enjoy the mystery haul at a fraction of the price.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="journey-payment reveal" style="margin-top:40px;">
+      <div style="text-align:center;width:100%;margin-bottom:16px;font-size:0.8rem;font-weight:600;color:var(--text-muted);letter-spacing:0.1em;text-transform:uppercase;">
+        Accepted Payment Methods
+      </div>
+      <div class="payment-badge">💳 CIB Card</div>
+      <div class="payment-badge">📱 Edahabia</div>
+      <div class="payment-badge">💵 Cash on Pickup</div>
+      <div class="payment-badge">🔒 Secure Checkout</div>
     </div>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════
-     CHARITY / PAY-IT-FORWARD
+     OUR TEAM
 ════════════════════════════════════ -->
-<section id="charity" class="charity-section py-24 px-6">
-  <div class="max-w-5xl mx-auto">
-
-    <div class="text-center mb-14 reveal">
-      <p class="section-eyebrow mb-3" style="color:#d97706;">Pay-It-Forward</p>
-      <h2 class="section-title mb-4">
-        Good Food. <span style="color:var(--orange-cta);">Even Better Karma.</span>
-      </h2>
-      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-        With one tap, transform your purchase into a gift for someone who really needs it.
-        No middlemen. Instant digital transfer.
+<section id="team" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Our Team</div>
+      <h2 class="section-title">The Founders <span class="accent">Behind WFIR</span></h2>
+      <p class="section-sub">
+        A multidisciplinary team combining technology, finance, business strategy,
+        and operations to bring WFIR to life.
       </p>
     </div>
 
-    <!-- Donate flow diagram -->
-    <div class="donate-flow mb-14 reveal">
-      <div class="flow-node">
-        <div style="font-size:2rem;margin-bottom:8px;">🛒</div>
-        <div style="font-size:0.85rem;font-weight:700;color:#111;">You buy</div>
-        <div style="font-size:0.75rem;color:#888;">a Surprise Box</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node">
-        <div style="font-size:2rem;margin-bottom:8px;">💛</div>
-        <div style="font-size:0.85rem;font-weight:700;color:#111;">Tap "Donate"</div>
-        <div style="font-size:0.75rem;color:#888;">in the app</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="background:linear-gradient(135deg,#fff9ee,#fef3c7);border-color:#fcd34d;">
-        <div style="font-size:2rem;margin-bottom:8px;">📱</div>
-        <div style="font-size:0.85rem;font-weight:700;color:#111;">Ticket transfers</div>
-        <div style="font-size:0.75rem;color:#888;">digitally, instantly</div>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac;">
-        <div style="font-size:2rem;margin-bottom:8px;">🤲</div>
-        <div style="font-size:0.85rem;font-weight:700;color:#111;">Charity picks up</div>
-        <div style="font-size:0.75rem;color:#888;">at the same window</div>
-      </div>
-    </div>
+    <div class="team-grid">
 
-    <!-- Impact counters — data-count drives the JS counter animation -->
-    <div class="grid md:grid-cols-3 gap-6 reveal">
-      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #fde68a;text-align:center;">
-        <div data-count="210" style="font-size:2.5rem;font-family:'Syne',sans-serif;font-weight:800;color:#d97706;">0</div>
-        <div style="font-size:0.85rem;color:#888;margin-top:4px;">Boxes donated this month</div>
+      <!-- CEO -->
+      <div class="team-card reveal delay-1">
+        <div class="team-card-header">
+          <div class="team-avatar">👩‍💼</div>
+          <div class="team-name">Manar Benmokhtar</div>
+          <div class="team-role-badge">CEO &amp; Co-Founder</div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-desc">
+            Leads WFIR's vision, strategy, and day-to-day operations. Manages investor
+            relations and ensures the mission stays at the heart of every decision.
+          </div>
+          <div class="skill-chips">
+            <span class="chip">Entrepreneurship</span>
+            <span class="chip">Leadership</span>
+            <span class="chip">Strategic Thinking</span>
+            <span class="chip">Communication</span>
+          </div>
+        </div>
       </div>
-      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #fde68a;text-align:center;">
-        <div data-count="48" style="font-size:2.5rem;font-family:'Syne',sans-serif;font-weight:800;color:#d97706;">0</div>
-        <div style="font-size:0.85rem;color:#888;margin-top:4px;">Partner charities &amp; shelters</div>
-      </div>
-      <div style="background:#fff;border-radius:20px;padding:24px;border:1.5px solid #fde68a;text-align:center;">
-        <div style="font-size:2.5rem;font-family:'Syne',sans-serif;font-weight:800;color:#d97706;">$0</div>
-        <div style="font-size:0.85rem;color:#888;margin-top:4px;">Platform fee on donated boxes</div>
-      </div>
-    </div>
 
-    <p class="text-center text-sm text-gray-400 mt-8">
-      ✦ Verified partner charities only — every recipient is vetted and onboarded by our trust &amp; safety team.
-    </p>
+      <!-- CTO -->
+      <div class="team-card reveal delay-2">
+        <div class="team-card-header" style="background:linear-gradient(150deg,#1B4D6E,#1B6E89);">
+          <div class="team-avatar">👨‍💻</div>
+          <div class="team-name">Hocine Boubekeur</div>
+          <div class="team-role-badge">CTO</div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-desc">
+            Develops and maintains the WFIR mobile app and backend infrastructure.
+            Ensures platform security and system scalability as the network grows.
+          </div>
+          <div class="skill-chips">
+            <span class="chip">Software Engineering</span>
+            <span class="chip">System Architecture</span>
+            <span class="chip">Cybersecurity</span>
+            <span class="chip">Backend Dev</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CFO -->
+      <div class="team-card reveal delay-3">
+        <div class="team-card-header" style="background:linear-gradient(150deg,#6E4A1B,#8B6A2E);">
+          <div class="team-avatar">👩‍💹</div>
+          <div class="team-name">Gaya Oudjoudi</div>
+          <div class="team-role-badge">CFO &amp; Data Analyst</div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-desc">
+            Oversees budgeting, forecasting, and performance analytics. Turns raw data
+            into strategic insights that guide WFIR's financial decisions and growth path.
+          </div>
+          <div class="skill-chips">
+            <span class="chip">Financial Modelling</span>
+            <span class="chip">Data Analysis</span>
+            <span class="chip">Forecasting</span>
+            <span class="chip">Analytics</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partnerships Lead -->
+      <div class="team-card reveal delay-4">
+        <div class="team-card-header" style="background:linear-gradient(150deg,#3B1B6E,#5A2E8B);">
+          <div class="team-avatar">👨‍🤝‍👨</div>
+          <div class="team-name">Mohamed Atmani</div>
+          <div class="team-role-badge">Partnerships Lead</div>
+        </div>
+        <div class="team-card-body">
+          <div class="team-desc">
+            Manages retailer partnerships and charity redistribution coordination.
+            Builds the trust network that underpins WFIR's three-sided marketplace.
+          </div>
+          <div class="skill-chips">
+            <span class="chip">Business Development</span>
+            <span class="chip">Negotiation</span>
+            <span class="chip">Stakeholder Mgmt</span>
+            <span class="chip">Ops Coordination</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════
-     SOCIAL PROOF / TRUST BANNER
+     MATHEMATICS AT THE CORE
 ════════════════════════════════════ -->
-<section class="py-24 px-6" style="background:var(--cream);">
-  <div class="max-w-6xl mx-auto">
+<section id="math" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Academic Foundation</div>
+      <h2 class="section-title" style="color:#fff;">Mathematics <span style="color:var(--gold-light);">at the Core</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6);">
+        WFIR is built on four mathematical disciplines — each powering a critical
+        function of the platform.
+      </p>
+    </div>
 
-    <div class="text-center mb-14 reveal">
-      <p class="section-eyebrow mb-3">Trusted Partners</p>
-      <h2 class="section-title mb-4">
-        The businesses already <span style="color:var(--green-primary);">on board.</span>
-      </h2>
-      <div style="display:inline-flex;align-items:center;gap:8px;background:#dcfce7;border:1px solid #86efac;border-radius:50px;padding:8px 18px;font-size:0.85rem;font-weight:600;color:#15803d;">
-        🎉 Over 1,000 meals saved this month
+    <!-- Diagram -->
+    <div class="math-diagram">
+      <div class="math-svg-wrap" style="position:relative;height:520px;">
+
+        <!-- Canvas for animated lines (drawn by JS) -->
+        <canvas id="math-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+
+        <!-- Center core -->
+        <div id="math-core" class="math-core">
+          <div class="c-icon">📐</div>
+          <div class="c-text">MATH</div>
+        </div>
+
+        <!-- Top node: Optimisation -->
+        <div id="math-n-top" class="math-label math-n-top reveal">
+          <div class="m-icon">⚡</div>
+          <div class="m-name">Optimisation</div>
+          <div class="m-desc">Dynamic pricing algorithm — maximises recovery value per bag in real time</div>
+        </div>
+
+        <!-- Right node: Graph Theory -->
+        <div id="math-n-right" class="math-label math-n-right reveal delay-1">
+          <div class="m-icon">🗺️</div>
+          <div class="m-name">Graph Theory</div>
+          <div class="m-desc">Geolocation &amp; routing — shortest delivery paths for charity redistribution</div>
+        </div>
+
+        <!-- Bottom node: Statistics -->
+        <div id="math-n-bottom" class="math-label math-n-bottom reveal delay-2">
+          <div class="m-icon">📊</div>
+          <div class="m-name">Statistics</div>
+          <div class="m-desc">Surplus forecasting models — predict daily bag volumes per retailer</div>
+        </div>
+
+        <!-- Left node: Financial Math -->
+        <div id="math-n-left" class="math-label math-n-left reveal delay-3">
+          <div class="m-icon">💹</div>
+          <div class="m-name">Financial Maths</div>
+          <div class="m-desc">Break-even &amp; pricing analysis — models viable discount tiers per category</div>
+        </div>
+
       </div>
     </div>
 
-    <!-- Partner badge grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-16 reveal">
-      <div class="partner-badge">
-        <div class="partner-avatar" style="background:#fef9ee;">🥐</div>
-        <div>
-          <div class="font-semibold text-sm">Sunrise Artisan Bakery</div>
-          <div class="text-xs text-gray-400">340 boxes sold · ⭐ 4.9</div>
-        </div>
+    <!-- Math detail cards -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;">
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 18px;text-align:center;" class="reveal delay-1">
+        <div style="font-size:2rem;margin-bottom:10px;">⚡</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold-light);margin-bottom:6px;">Linear Programming</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">Optimise bag pricing subject to minimum retailer revenue constraints</div>
       </div>
-      <div class="partner-badge">
-        <div class="partner-avatar" style="background:#fef2f2;">🌮</div>
-        <div>
-          <div class="font-semibold text-sm">Taco Loca</div>
-          <div class="text-xs text-gray-400">218 boxes sold · ⭐ 4.8</div>
-        </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 18px;text-align:center;" class="reveal delay-2">
+        <div style="font-size:2rem;margin-bottom:10px;">🌐</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold-light);margin-bottom:6px;">Shortest Paths</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">Dijkstra / A* algorithm routes charity deliveries across Algiers</div>
       </div>
-      <div class="partner-badge">
-        <div class="partner-avatar" style="background:#f0fdf4;">🥗</div>
-        <div>
-          <div class="font-semibold text-sm">Green Bowl Kitchen</div>
-          <div class="text-xs text-gray-400">179 boxes sold · ⭐ 5.0</div>
-        </div>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 18px;text-align:center;" class="reveal delay-3">
+        <div style="font-size:2rem;margin-bottom:10px;">📉</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold-light);margin-bottom:6px;">Regression Models</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">Predict nightly surplus quantity from historical sales &amp; seasonal data</div>
       </div>
-      <div class="partner-badge">
-        <div class="partner-avatar" style="background:#eff6ff;">☕</div>
-        <div>
-          <div class="font-semibold text-sm">The Daily Grind Café</div>
-          <div class="text-xs text-gray-400">154 boxes sold · ⭐ 4.9</div>
-        </div>
-      </div>
-      <div class="partner-badge">
-        <div class="partner-avatar" style="background:#fdf4ff;">🍕</div>
-        <div>
-          <div class="font-semibold text-sm">Margherita &amp; Co.</div>
-          <div class="text-xs text-gray-400">132 boxes sold · ⭐ 4.7</div>
-        </div>
-      </div>
-      <div class="partner-badge" style="border-style:dashed;border-color:rgba(26,122,60,0.25);justify-content:center;cursor:pointer;">
-        <span class="text-green-700 font-bold text-sm text-center">+ 335 more partners →</span>
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:18px;padding:24px 18px;text-align:center;" class="reveal delay-4">
+        <div style="font-size:2rem;margin-bottom:10px;">📐</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--gold-light);margin-bottom:6px;">Break-Even Analysis</div>
+        <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);line-height:1.5;">Fixed vs. variable cost modelling to determine viable discount floors</div>
       </div>
     </div>
-
-    <!-- Testimonials -->
-    <div class="grid md:grid-cols-2 gap-6 reveal">
-      <div class="testimonial-card">
-        <p class="text-gray-600 leading-relaxed mt-6 mb-6">
-          "We used to throw away two full trays of pastries every night. Now those same items generate
-          an extra $300/month with zero extra work. SurpriseBox is a no-brainer."
-        </p>
-        <div class="flex items-center gap-3">
-          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#dcfce7,#bbf7d0);display:flex;align-items:center;justify-content:center;font-size:20px;">👩</div>
-          <div>
-            <div class="font-bold text-sm">Maria Chen</div>
-            <div class="text-xs text-gray-400">Owner, Sunrise Artisan Bakery</div>
-          </div>
-          <div class="ml-auto text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <p class="text-gray-600 leading-relaxed mt-6 mb-6">
-          "I got a box with a sourdough loaf, three croissants, and a pain au chocolat for $4.
-          My jaw dropped. I've been hooked every Friday since."
-        </p>
-        <div class="flex items-center gap-3">
-          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#fff7ed,#fed7aa);display:flex;align-items:center;justify-content:center;font-size:20px;">👨</div>
-          <div>
-            <div class="font-bold text-sm">Alex Rivera</div>
-            <div class="text-xs text-gray-400">Regular Customer, San Francisco</div>
-          </div>
-          <div class="ml-auto text-yellow-400 text-sm">⭐⭐⭐⭐⭐</div>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
 
 <!-- ════════════════════════════════════
-     FINAL CTA BAND
+     COMPETITIVE ADVANTAGE
 ════════════════════════════════════ -->
-<section style="background:linear-gradient(135deg,#0f4d26,#1a7a3c);padding:80px 24px;text-align:center;">
-  <div class="max-w-3xl mx-auto reveal">
-    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:16px;">
-      Ready to rescue some food?
-    </h2>
-    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;margin-bottom:36px;">
-      Join 12,000+ users already saving money and the planet — one Surprise Box at a time.
-    </p>
-    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;">
-      <a href="#" class="btn-cta-primary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.35c1.42.07 2.4.8 3.22.78.96-.05 2.79-.89 4.05-.42 2.18.76 3.01 2.96 2.73 5.57zm-5.59-10.3c-.19-1.8.8-3.77 2.44-4.78 1.58-1.01 3.47-.68 4.37-.07-.64 3.4-3.52 4.77-6.81 4.85z"/>
-        </svg>
-        Download on the App Store
-      </a>
-      <a href="#" class="btn-cta-secondary">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3.18 23.76c.34.19.72.24 1.09.14l12.72-7.35-2.76-2.77-11.05 9.98zm16.8-10.4L17.4 11.9 14.37 15l3.05 3.05 2.59-1.5c.74-.43.74-1.56-.03-2.19zM1.54.43C1.2.78 1 1.33 1 2.02v20c0 .69.2 1.24.54 1.59l.08.08 11.2-11.2v-.27L1.62.35l-.08.08zm12.85 11.71L3.17 1.02c.37-.1.76-.06 1.1.14l12.73 7.35-2.61 3.63z"/>
-        </svg>
-        Get it on Google Play
-      </a>
+<section id="advantage" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Competitive Advantage</div>
+      <h2 class="section-title">What Sets <span class="gold">WFIR Apart</span></h2>
+      <p class="section-sub">
+        Four strategic pillars that make WFIR unique in the Algerian food-tech landscape.
+      </p>
     </div>
+
+    <div class="advantage-grid">
+
+      <div class="adv-card reveal delay-1">
+        <div class="adv-icon">🥇</div>
+        <div>
+          <div class="adv-title">First-Mover Advantage</div>
+          <div class="adv-body">
+            Algeria's <strong>first anti-food-waste food-tech app</strong> with no direct local competitor.
+            We own the category before it even exists — defining the standard others will follow.
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-card reveal delay-2">
+        <div class="adv-icon">🔺</div>
+        <div>
+          <div class="adv-title">Three-Sided Marketplace</div>
+          <div class="adv-body">
+            A connected ecosystem linking <strong>consumers, producers, and charities</strong> — unlike
+            two-sided platforms, our third side (charities) acts as a zero-waste safety net and social multiplier.
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-card reveal delay-1">
+        <div class="adv-icon">🇩🇿</div>
+        <div>
+          <div class="adv-title">Deep Local Integration</div>
+          <div class="adv-body">
+            Full <strong>Arabic &amp; French</strong> accessibility. Special <strong>Ramadan collaborations</strong>
+            with Rahma restaurants. CIB/Edahabia payment support. Built for Algeria, not adapted for it.
+          </div>
+        </div>
+      </div>
+
+      <div class="adv-card reveal delay-2">
+        <div class="adv-icon">♻️</div>
+        <div>
+          <div class="adv-title">Sustainable Zero-Waste Model</div>
+          <div class="adv-body">
+            Combines <strong>discounted sales + charity redistribution + CO₂ reduction</strong>.
+            Every bag either earns revenue or feeds someone — none goes to landfill. A true circular economy loop.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Skills for success -->
+    <div style="margin-top:56px;background:var(--white);border-radius:var(--radius-lg);padding:40px;border:1px solid rgba(27,94,54,0.1);box-shadow:var(--shadow-card);" class="reveal">
+      <div style="text-align:center;margin-bottom:28px;">
+        <div class="eyebrow" style="justify-content:center;">Skills for Success</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ink);">
+          Key Competencies Our Startup Requires
+        </h3>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;">
+        <div style="background:rgba(27,94,54,0.05);border:1px solid rgba(27,94,54,0.1);border-radius:14px;padding:16px;text-align:center;">
+          <div style="font-size:1.5rem;margin-bottom:6px;">💡</div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--emerald);">Entrepreneurial Mindset</div>
+        </div>
+        <div style="background:rgba(27,94,54,0.05);border:1px solid rgba(27,94,54,0.1);border-radius:14px;padding:16px;text-align:center;">
+          <div style="font-size:1.5rem;margin-bottom:6px;">📱</div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--emerald);">Mobile App Development</div>
+        </div>
+        <div style="background:rgba(27,94,54,0.05);border:1px solid rgba(27,94,54,0.1);border-radius:14px;padding:16px;text-align:center;">
+          <div style="font-size:1.5rem;margin-bottom:6px;">📊</div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--emerald);">Data &amp; Financial Analysis</div>
+        </div>
+        <div style="background:rgba(27,94,54,0.05);border:1px solid rgba(27,94,54,0.1);border-radius:14px;padding:16px;text-align:center;">
+          <div style="font-size:1.5rem;margin-bottom:6px;">🤝</div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--emerald);">Negotiation &amp; Partnerships</div>
+        </div>
+        <div style="background:rgba(27,94,54,0.05);border:1px solid rgba(27,94,54,0.1);border-radius:14px;padding:16px;text-align:center;">
+          <div style="font-size:1.5rem;margin-bottom:6px;">🛡️</div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--emerald);">Cybersecurity &amp; Data Privacy</div>
+        </div>
+        <div style="background:rgba(27,94,54,0.05);border:1px solid rgba(27,94,54,0.1);border-radius:14px;padding:16px;text-align:center;">
+          <div style="font-size:1.5rem;margin-bottom:6px;">📐</div>
+          <div style="font-size:0.82rem;font-weight:700;color:var(--emerald);">Applied Mathematics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     RISK MANAGEMENT / PITFALLS
+════════════════════════════════════ -->
+<section id="pitfalls" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Risk Management</div>
+      <h2 class="section-title">Pitfalls <span class="gold">to Avoid</span></h2>
+      <p class="section-sub">
+        Anticipating risks before they arise is what separates a lasting startup
+        from a cautionary tale.
+      </p>
+    </div>
+
+    <div class="pitfalls-grid">
+
+      <div class="pitfall-card reveal delay-1">
+        <div class="pitfall-icon">🐢</div>
+        <div class="pitfall-title">Premature Scaling</div>
+        <div class="pitfall-body">
+          Resist the urge to expand to multiple cities before the Algiers model is battle-tested.
+          Perfect operations locally, then scale with confidence.
+        </div>
+        <span class="pitfall-badge">⚠️ Growth Risk</span>
+      </div>
+
+      <div class="pitfall-card reveal delay-2">
+        <div class="pitfall-icon">🚚</div>
+        <div class="pitfall-title">Charity Logistics Failure</div>
+        <div class="pitfall-body">
+          Tight pickup windows require reliable last-mile delivery. We mitigate this with
+          subsidised Yassir delivery partnerships for unclaimed bag redistribution.
+        </div>
+        <span class="pitfall-badge">⚠️ Ops Risk</span>
+      </div>
+
+      <div class="pitfall-card reveal delay-3">
+        <div class="pitfall-icon">🍽️</div>
+        <div class="pitfall-title">Food Safety Compliance</div>
+        <div class="pitfall-body">
+          Onboarding unvetted retailers risks trust. We enforce strict listing rules, mandatory
+          retailer training, and regular compliance audits across the network.
+        </div>
+        <span class="pitfall-badge">⚠️ Safety Risk</span>
+      </div>
+
+      <div class="pitfall-card reveal delay-1">
+        <div class="pitfall-icon">🔐</div>
+        <div class="pitfall-title">Weak Data Security</div>
+        <div class="pitfall-body">
+          User trust is everything. WFIR implements GDPR-level encryption and stores
+          zero raw payment data — compliance from day one, not as an afterthought.
+        </div>
+        <span class="pitfall-badge">⚠️ Security Risk</span>
+      </div>
+
+      <div class="pitfall-card reveal delay-2">
+        <div class="pitfall-icon">🌾</div>
+        <div class="pitfall-title">Allergen Mismanagement</div>
+        <div class="pitfall-body">
+          A single allergen incident destroys credibility. We enforce mandatory allergen training,
+          dual-labelling on all bags, and regular retailer audits to protect consumers.
+        </div>
+        <span class="pitfall-badge">⚠️ Health Risk</span>
+      </div>
+
+      <div class="pitfall-card reveal delay-3">
+        <div class="pitfall-icon">💸</div>
+        <div class="pitfall-title">Underpricing the Model</div>
+        <div class="pitfall-body">
+          Setting discounts too aggressively makes the platform unsustainable.
+          Our Financial Mathematics team models break-even thresholds to keep
+          discount tiers viable for all parties.
+        </div>
+        <span class="pitfall-badge">⚠️ Financial Risk</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
+     PARTNERS
+════════════════════════════════════ -->
+<section id="partners" class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">Strategic Partners</div>
+      <h2 class="section-title" style="color:var(--white);">Our <span style="color:var(--gold-light);">Partner Network</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6);">
+        WFIR works with trusted Algerian organisations to deliver
+        maximum social, logistical, and humanitarian impact.
+      </p>
+    </div>
+
+    <div class="partners-grid">
+
+      <div class="partner-card reveal delay-1">
+        <div class="partner-icon">🌙</div>
+        <div class="partner-name">Algerian Red Crescent</div>
+        <div class="partner-role">Humanitarian &amp; food aid — priority recipient of unclaimed Surprise Bags</div>
+      </div>
+
+      <div class="partner-card reveal delay-2">
+        <div class="partner-icon">🏦</div>
+        <div class="partner-name">Algerian Food Bank</div>
+        <div class="partner-role">Food recovery &amp; redistribution — national network for surplus recovery</div>
+      </div>
+
+      <div class="partner-card reveal delay-3">
+        <div class="partner-icon">🚗</div>
+        <div class="partner-name">Yassir</div>
+        <div class="partner-role">Logistics &amp; Surprise Bag delivery — subsidised last-mile charity drops</div>
+      </div>
+
+      <div class="partner-card reveal delay-4">
+        <div class="partner-icon">🤲</div>
+        <div class="partner-name">SOS Women in Distress</div>
+        <div class="partner-role">Women's shelter &amp; social support — beneficiary of WFIR charity bags</div>
+      </div>
+
+    </div>
+
+    <!-- Mission statement banner -->
+    <div style="margin-top:48px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-lg);padding:40px;text-align:center;" class="reveal">
+      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-style:italic;font-weight:700;color:var(--white);line-height:1.3;margin-bottom:16px;">
+        "وفير — Abundant, accessible, sustainable.<br/>
+        <span style="color:var(--gold-light);">Every meal matters. Every bag counts."</span>
+      </div>
+      <p style="font-size:0.85rem;color:rgba(255,255,255,0.5);max-width:480px;margin:0 auto;">
+        WFIR's mission is to make food rescue the default behaviour — not the exception —
+        in Algerian cities. Starting in Algiers. Expanding from there.
+      </p>
+    </div>
+
   </div>
 </section>
 
@@ -550,97 +732,62 @@
 <!-- ════════════════════════════════════
      FOOTER
 ════════════════════════════════════ -->
-<footer class="pt-16 pb-8 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
 
-      <!-- Brand column -->
-      <div class="col-span-2 md:col-span-1">
-        <div class="footer-logo mb-4">Surprise<span>Box</span></div>
-        <p style="font-size:0.9rem;line-height:1.7;color:rgba(255,255,255,0.5);">
-          Connecting surplus food with people who love it. One sealed box at a time.
+      <div class="footer-brand">
+        <div class="f-logo">W<span>FIR</span> وفير</div>
+        <p>
+          Algeria's first food-rescue app. Connecting surplus with those who need it most —
+          one Surprise Bag at a time.
         </p>
-        <div class="flex gap-3 mt-6">
-          <a href="#" class="social-icon" aria-label="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="2" width="20" height="20" rx="5"/>
-              <circle cx="12" cy="12" r="5"/>
-              <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
-            </svg>
-          </a>
-          <a href="#" class="social-icon" aria-label="TikTok">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
-            </svg>
-          </a>
-          <a href="#" class="social-icon" aria-label="Twitter / X">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-          </a>
-        </div>
       </div>
 
-      <!-- Company links -->
-      <div>
-        <h5 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:16px;">Company</h5>
-        <ul style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;">
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Sustainability Report</a></li>
-          <li><a href="#">Press &amp; Media</a></li>
-          <li><a href="#">Careers</a></li>
+      <div class="footer-links">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#about">About WFIR</a></li>
+          <li><a href="#journey">How It Works</a></li>
+          <li><a href="#partners">Partners</a></li>
         </ul>
       </div>
 
-      <!-- Platform links -->
-      <div>
-        <h5 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:16px;">Platform</h5>
-        <ul style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;">
-          <li><a href="#merchants">For Businesses</a></li>
-          <li><a href="#charity">For Charities</a></li>
-          <li><a href="#">Partner Dashboard</a></li>
-          <li><a href="#">Help Center</a></li>
+      <div class="footer-links">
+        <h4>Team</h4>
+        <ul>
+          <li><a href="#team">Manar Benmokhtar · CEO</a></li>
+          <li><a href="#team">Hocine Boubekeur · CTO</a></li>
+          <li><a href="#team">Gaya Oudjoudi · CFO</a></li>
+          <li><a href="#team">Mohamed Atmani · Partnerships</a></li>
         </ul>
       </div>
 
-      <!-- Legal links -->
-      <div>
-        <h5 style="color:#fff;font-weight:700;font-size:0.9rem;margin-bottom:16px;">Legal</h5>
-        <ul style="display:flex;flex-direction:column;gap:10px;font-size:0.88rem;">
+      <div class="footer-links">
+        <h4>Legal &amp; Safety</h4>
+        <ul>
           <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li>
-            <a href="#" style="display:flex;flex-direction:column;gap:2px;">
-              Food Handling Policy
-              <span style="font-size:0.72rem;color:rgba(255,255,255,0.35);font-weight:400;">
-                Zero liability model — see details
-              </span>
-            </a>
-          </li>
-          <li><a href="#">Cookie Preferences</a></li>
+          <li><a href="#">Privacy Policy (GDPR)</a></li>
+          <li><a href="#">Allergen Policy</a></li>
+          <li><a href="#">Food Safety Guidelines</a></li>
         </ul>
       </div>
 
     </div>
 
-    <!-- Bottom bar -->
-    <div style="border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;">
-      <p style="font-size:0.82rem;color:rgba(255,255,255,0.3);">
-        © 2025 SurpriseBox Technologies, Inc. All rights reserved. Made with 💚 for the planet.
-      </p>
-      <p style="font-size:0.78rem;color:rgba(255,255,255,0.2);">
-        SurpriseBox is a technology platform. We do not handle, prepare, or take liability for food items.
-      </p>
+    <div class="footer-bottom">
+      <span>© 2025 WFIR Technologies — Algiers, Algeria. All rights reserved.</span>
+      <span style="color:rgba(255,255,255,0.3);font-size:0.75rem;">
+        🌿 Startup Poster Project · Mathematics Department · May 2026
+      </span>
     </div>
   </div>
 </footer>
 
 
 <!-- ════════════════════════════════════
-     SCRIPTS (loaded last for performance)
+     SCRIPTS
 ════════════════════════════════════ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="main.js"></script>
 
 </body>
