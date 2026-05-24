@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   WFIR — Poster Website  |  main.js
+   Wafir — Poster Website  |  main.js
 ═══════════════════════════════════════════ */
 
 /* ════════════════════════════════
@@ -28,6 +28,12 @@
   }
 })();
 
+window.addEventListener('scroll', () => {
+  const scrollPx = document.documentElement.scrollTop;
+  const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const scrolled = (scrollPx / winHeightPx) * 100;
+  document.getElementById('scroll-progress').style.width = scrolled + '%';
+});
 
 /* ════════════════════════════════
    2. HERO ENTRANCE ANIMATION
@@ -260,3 +266,121 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
+/* ════════════════════════════════
+   8. DRAGGABLE MATH NODES
+════════════════════════════════ */
+(function initDraggableNodes() {
+  const nodes = document.querySelectorAll('.math-label');
+  
+  nodes.forEach(el => {
+    let startX = 0, startY = 0, x = 0, y = 0;
+    
+    // Support both Mouse and Touch
+    el.addEventListener('mousedown', dragStart);
+    el.addEventListener('touchstart', dragStart, { passive: false });
+    
+    function dragStart(e) {
+      // Disable dragging on mobile view where nodes are stacked
+      if (window.innerWidth <= 768) return;
+      
+      // Prevent scrolling if on tablet touch
+      if (e.type === 'touchstart') e.preventDefault();
+      
+      // First time clicked: Convert CSS % and transforms to fixed pixels for smooth dragging
+      if (!el.dataset.dragReady) {
+        const rect = el.getBoundingClientRect();
+        const parentRect = el.parentElement.getBoundingClientRect();
+        
+        el.style.left = (rect.left - parentRect.left) + 'px';
+        el.style.top = (rect.top - parentRect.top) + 'px';
+        el.style.right = 'auto';
+        el.style.bottom = 'auto';
+        el.style.transform = 'none'; 
+        
+        // Remove CSS transform transitions so it doesn't "lag" behind the mouse
+        el.style.transition = 'background 0.3s, border-color 0.3s'; 
+        el.dataset.dragReady = 'true';
+      }
+      
+      // Get initial click position
+      startX = e.clientX || e.touches[0].clientX;
+      startY = e.clientY || e.touches[0].clientY;
+      
+      el.style.zIndex = 100; // Bring to front while dragging
+      
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('touchmove', drag, { passive: false });
+      document.addEventListener('mouseup', dragEnd);
+      document.addEventListener('touchend', dragEnd);
+    }
+    
+    function drag(e) {
+      e.preventDefault();
+      const clientX = e.clientX || e.touches[0].clientX;
+      const clientY = e.clientY || e.touches[0].clientY;
+      
+      // Calculate how far the mouse has moved
+      x = startX - clientX;
+      y = startY - clientY;
+      startX = clientX;
+      startY = clientY;
+      
+      // Apply new position
+      el.style.top = (el.offsetTop - y) + "px";
+      el.style.left = (el.offsetLeft - x) + "px";
+    }
+    
+    function dragEnd() {
+      el.style.zIndex = ''; // Reset z-index
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('touchmove', drag);
+      document.removeEventListener('mouseup', dragEnd);
+      document.removeEventListener('touchend', dragEnd);
+    }
+  });
+})();
+
+/* ════════════════════════════════
+   9. 3D HERO PARALLAX
+════════════════════════════════ */
+(function initHeroParallax() {
+  const hero = document.getElementById('hero');
+  const orb = document.querySelector('.hero-orb');
+  const star = document.querySelector('.hero-star');
+  const content = document.querySelector('.hero-content');
+
+  if (!hero) return;
+
+  hero.addEventListener('mousemove', (e) => {
+    // Disable on mobile
+    if (window.innerWidth <= 768) return;
+
+    // Calculate mouse position relative to center of screen
+    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+
+    // Move elements at different speeds for 3D depth
+    if (content) content.style.transform = `translate(${xAxis * 0.5}px, ${yAxis * 0.5}px)`;
+    if (orb) orb.style.transform = `translate(${xAxis * -1.5}px, ${yAxis * -1.5}px)`;
+    if (star) star.style.transform = `translateY(-50%) translateX(${xAxis * -0.8}px)`;
+  });
+
+  // Reset when mouse leaves
+  hero.addEventListener('mouseleave', () => {
+    if (content) content.style.transform = `translate(0, 0)`;
+    if (orb) orb.style.transform = `translate(0, 0)`;
+    if (star) star.style.transform = `translateY(-50%) translateX(0)`;
+    
+    // Add smooth spring-back transition
+    [content, orb, star].forEach(el => {
+      if (el) el.style.transition = 'transform 0.5s ease-out';
+    });
+  });
+
+  // Remove transition when hovering so it follows mouse instantly
+  hero.addEventListener('mouseenter', () => {
+    [content, orb, star].forEach(el => {
+      if (el) el.style.transition = 'none';
+    });
+  });
+})();
